@@ -6,6 +6,13 @@ export default function SignUpForm({ token, setToken}) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    function validateForm() {
+        if (username.length < 8) {
+            setError("Username must be 8 characters or more");
+            return false;
+        }
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
@@ -30,6 +37,7 @@ export default function SignUpForm({ token, setToken}) {
     return (
     <>
     <h2>Sign Up!</h2>
+    
     <form onSubmit={handleSubmit}>
             <label>
                 Username: <input value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -37,7 +45,7 @@ export default function SignUpForm({ token, setToken}) {
             <label>
                 Password: <input value={password} onChange={(e) => setPassword(e.target.value)}/>
             </label>
-            <button>Submit</button>
+            <button type="submit" onClick={()=> validateForm()}>Submit</button>
         </form>
     </>
     )
